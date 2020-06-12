@@ -6,7 +6,7 @@ from crontab import CronTab
 class CronJob:
     """
  
-    id      - A unique string identifier (default: root)
+    id      - A unique string identifier.
     cmd     - The console command.
     time    - A string slice or special variable.
     
