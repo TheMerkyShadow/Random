@@ -1,3 +1,10 @@
+import os
+import sys
+
+import json
+
+from pathlib import Path
+
 class JsonConfig:
     def __init__(self, dir='manifest.json'):
         self.Path = Path(dir)
