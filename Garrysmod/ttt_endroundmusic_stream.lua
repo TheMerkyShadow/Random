@@ -1,20 +1,28 @@
-sounds = {
+local sounds = {
 	innocent = {
-		"example1.mp3"
+		"innocent1.mp3",
+		"innocent2.mp3",
+		"innocent3.mp3",
+		"innocent4.mp3",
+		"innocent5.mp3"
 	},
 	traitor = {
-		"example2.mp3"
+		"traitor1.mp3",
+		"traitor2.mp3",
+		"traitor3.mp3",
+		"traitor4.mp3",
+		"traitor5.mp3"
 	},
 	timeout = {
-		"example3.mp3"
+		"time.mp3"
 	}
 }
 
+
 if SERVER then
-	url = ( "http://127.0.0.1/audio/" )
 	util.AddNetworkString("EndMusic")
+	url = ( "http://" .. string.Split(game.GetIPAddress(),":")[1] .. ":80" .. "/audio/" )
 	hook.Add("TTTEndRound", "endroundurl", function(result)
-		local file = ""
 		if result == WIN_TRAITOR then
 			file, _ = table.Random(sounds.traitor)
 		elseif result == WIN_INNOCENT then
@@ -28,40 +36,26 @@ if SERVER then
 	end)
 else
 
-	CreateClientConVar( "music", "1", true, false )
-	CreateClientConVar( "music_vol", "0.75", true, false )
+	CreateClientConVar( "music_vol", "1", true, false )
 	
 	hook.Add("TTTSettingsTabs", "setting", function(dtabs)
-		custom = vgui.Create( "DPanel" )	
-		list = vgui.Create( "DPanelList", custom )	
-		list:SetSpacing( 5 )		
-		list:Dock( FILL )
-		list:DockMargin( 5, 5, 5, 0 )
+	
+		dsettings = dtabs:GetItems()[2].Panel
 		
-		local volume = vgui.Create( "DNumSlider", list )
-			volume:SetText( "Volume" )
-			volume:SetDark(true)
-			volume:SetMin( 0 )
-			volume:SetMax( 1 )
-			volume:SetDecimals( 2 )
-			volume:SetConVar( "music_vol" ) 
-				
-		local check = vgui.Create( "DCheckBoxLabel", list )
-			check:SetText( "Allow EndRound Music" )
-			check:SetDark(true)
-			check:SetConVar( "music" )
+		dform = vgui.Create("DForm")
+		dform:SetName("EndRound Music")
 			
-		list:AddItem( volume )
-		list:AddItem( check )		
+		dform:NumSlider("Volume", "music_vol", 0, 1, 2 )
 		
-		dtabs:AddSheet( "Custom", custom, "icon16/tick.png" )
+		dsettings:AddItem(dform)
+		
 	end)
    
 	net.Receive( "EndMusic", function() 
-		music = GetConVar("music"):GetInt() 
+		url = net.ReadString()
 		music_vol = GetConVar("music_vol"):GetFloat()
-		if music then
-			sound.PlayURL(net.ReadString(), "", function(station)
+		if music_vol then
+			sound.PlayURL(url, "", function(station)
 				if ( IsValid( station ) ) then
 					station:Play()
 					station:SetVolume(music_vol)
