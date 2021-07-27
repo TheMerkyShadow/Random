@@ -54,7 +54,7 @@ else
 	net.Receive( "EndMusic", function() 
 		url = net.ReadString()
 		music_vol = GetConVar("music_vol"):GetFloat()
-		if music_vol then
+		if music_vol != 0 then
 			sound.PlayURL(url, "", function(station)
 				if ( IsValid( station ) ) then
 					station:Play()
