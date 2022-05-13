@@ -25,7 +25,7 @@ end
 
 function ENT:Initialize()
 
-	self:SetModel( "models/Combine_Helicopter/helicopter_bomb01.mdl" )
+    self:SetModel( "models/Combine_Helicopter/helicopter_bomb01.mdl" )
     self:PhysicsInit(SOLID_VPHYSICS)
     self:SetMoveType( MOVETYPE_VPHYSICS )
     self:SetSolid(SOLID_VPHYSICS)
@@ -35,21 +35,21 @@ function ENT:Initialize()
         phys:Wake()
     end   
 	
-	if !SERVER then return end
+    if !SERVER then return end
  
     self.Nade = ents.Create("env_explosion")
     self.Nade:SetPos( self:GetPos() )
     self.Nade:SetParent( self )
     self.Nade:SetKeyValue( "iMagnitude", "100" )
-	self.Nade:Spawn()
+    self.Nade:Spawn()
 	
     timer.Simple( self.Delay, function() self:Explode() end)
 	
 end
 
 function ENT:Explode()
-	if !SERVER then return end
-	SafeRemoveEntityDelayed(self,0.1)
-	self.Nade:Fire("Explode", 0, 0 ) 	
+    if !SERVER then return end
+    SafeRemoveEntityDelayed(self,0.1)
+    self.Nade:Fire("Explode", 0, 0 ) 	
 end
 
