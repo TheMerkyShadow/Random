@@ -12,7 +12,7 @@ class JsonConfig:
         self.Decode()
     def Check(self):
         if not self.Path.exists():
-            self.Path.write_text("[]")
+            self.Path.write_text("{}")
     def Decode(self):
         self.Table = json.loads(self.Path.read_text())
         return self.Table
