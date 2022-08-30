@@ -16,4 +16,3 @@ if files:
         rule = filename.lower()
 
         file.rename( rule )
-        exit()
