@@ -15,8 +15,8 @@ class JsonDictConfig:
         return json.dumps(self.Table, indent=4)
     def __getitem__(self, item):
         return self.Table.get(item, None)
-    def __setitem__(self, item, value)
-        self.Table.setdefault(item, value)    
+    def __setitem__(self, item, value):
+        self.Table[item] = value    
     def __delitem__(self, item):
          if item in self.Table:
               del self.Table[item]        
@@ -24,3 +24,4 @@ class JsonDictConfig:
         self.Path.write_text(self.Encode())
     def __repr__(self) -> str:
         return repr(self.Table)
+,
