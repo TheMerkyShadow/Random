@@ -16,12 +16,11 @@ class JsonDictConfig:
     def __getitem__(self, item):
         return self.Table.get(item, None)
     def __setitem__(self, item, value):
-        self.Table[item] = value    
+        self.Table[item] = value
     def __delitem__(self, item):
          if item in self.Table:
               del self.Table[item]        
     def Write(self):
         self.Path.write_text(self.Encode())
-    def __repr__(self) -> str:
+    def __repr__(self):
         return repr(self.Table)
-,
