@@ -2,25 +2,30 @@
 <html>
 <head>
     <title>PTR Calculator</title>
-	<style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
 
         input[type="number"] {
-            width: 80px;
+            width: 100%;
+            max-width: 200px;
+            box-sizing: border-box;
         }
 
         input[type="submit"] {
             margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
         }
 
         table {
             border-collapse: collapse;
             margin-top: 20px;
-            display: none;
-            width: 10%; /* Set table width to 100% */
+            width: 100%;
+            max-width: 400px;
         }
 
         th, td {
@@ -35,14 +40,17 @@
 
     <form id="inputForm">
         <label for="oopsAA">Opps for AA:</label>
+        <br>
         <input type="number" id="oopsAA" required>
         <br>
 
         <label for="smbDeduct">SMB to Deduct:</label>
+        <br>
         <input type="number" id="smbDeduct" required>
         <br>
 
         <label for="ptrPercentage">PTR(%):</label>
+        <br>
         <input type="number" id="ptrPercentage" required>
         <br>
 
