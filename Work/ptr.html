@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PTR Calculator</title>
+	<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+
+        input[type="submit"] {
+            margin-top: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            display: none;
+            width: 10%; /* Set table width to 100% */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>PTR Calculator</h1>
+
+    <form id="inputForm">
+        <label for="oopsAA">Opps for AA:</label>
+        <input type="number" id="oopsAA" required>
+        <br>
+
+        <label for="smbDeduct">SMB to Deduct:</label>
+        <input type="number" id="smbDeduct" required>
+        <br>
+
+        <label for="ptrPercentage">PTR(%):</label>
+        <input type="number" id="ptrPercentage" required>
+        <br>
+
+        <input type="submit" value="Calculate">
+    </form>
+
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>X</th>
+                <th>PTR</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function formatTrunc(number) {
+            const truncatedNumber = Math.floor(number * 100) / 100;
+            const formattedNumber = truncatedNumber.toFixed(2);
+            return formattedNumber;
+        }
+
+        function calculate() {
+            let N = parseInt(document.getElementById("oopsAA").value) || 0;
+            const SMB = parseInt(document.getElementById("smbDeduct").value) || 0;
+            const PTRPercentage = parseFloat(document.getElementById("ptrPercentage").value) / 100;
+            const PTRNumber = N * PTRPercentage;
+
+            N -= SMB; // Subtract SMB from N
+
+            const tableBody = document.querySelector("#resultTable tbody");
+            tableBody.innerHTML = "";
+
+            for (let X = 1; X <= 50; X++) {
+                const PTR = (PTRNumber + X) / (N + X);
+                const formattedPTR = formatTrunc(PTR);
+
+                const row = document.createElement("tr");
+                const xCell = document.createElement("td");
+                const ptrCell = document.createElement("td");
+
+                xCell.textContent = X;
+                ptrCell.textContent = formattedPTR;
+
+                row.appendChild(xCell);
+                row.appendChild(ptrCell);
+
+                tableBody.appendChild(row);
+
+                if (PTR >= 0.70) {
+                    break;
+                }
+            }
+
+            const resultTable = document.getElementById("resultTable");
+            resultTable.style.display = "table";
+        }
+
+        const form = document.getElementById("inputForm");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            calculate();
+        });
+    </script>
+</body>
+</html>
