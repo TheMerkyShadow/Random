@@ -15,6 +15,12 @@
             box-sizing: border-box;
         }
 
+        input[type="text"] {
+            width: 100%;
+            max-width: 200px;
+            box-sizing: border-box;
+        }
+
         input[type="submit"] {
             margin-top: 10px;
             width: 100%;
@@ -39,9 +45,9 @@
     <h1>PTR Calculator</h1>
 
     <form id="inputForm">
-        <label for="oopsAA">OppsforPTR:</label>
+        <label for="oppsPTR">OppsforPTR:</label>
         <br>
-        <input type="number" id="oopsAA" required>
+        <input type="number" id="oppsPTR" required>
         <br>
 
         <label for="smbDeduct">SMBtoDeduct:</label>
@@ -51,7 +57,7 @@
 
         <label for="ptrPercentage">PTR(%):</label>
         <br>
-        <input type="number" id="ptrPercentage" required>
+        <input type="text" id="ptrPercentage" required>
         <br>
 
         <input type="submit" value="Calculate">
@@ -76,9 +82,9 @@
         }
 
         function calculate() {
-            let N = parseInt(document.getElementById("oopsAA").value) || 0;
+            let N = parseInt(document.getElementById("oppsPTR").value) || 0;
             const SMB = parseInt(document.getElementById("smbDeduct").value) || 0;
-            const PTRPercentage = parseFloat(document.getElementById("ptrPercentage").value) / 100;
+            const PTRPercentage = parseFloat(document.getElementById("ptrPercentage").value.replace("%", "")) / 100;
             const PTRNumber = N * PTRPercentage;
 
             N -= SMB; // Subtract SMB from N
