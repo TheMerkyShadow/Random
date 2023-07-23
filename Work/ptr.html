@@ -85,9 +85,8 @@
             let N = parseInt(document.getElementById("oppsPTR").value) || 0;
             const SMB = parseInt(document.getElementById("smbDeduct").value) || 0;
             const PTRPercentage = parseFloat(document.getElementById("ptrPercentage").value.replace("%", "")) / 100;
-            const PTRNumber = N * PTRPercentage;
-
             N -= SMB; // Subtract SMB from N
+            const PTRNumber = N * PTRPercentage;
 
             const tableBody = document.querySelector("#resultTable tbody");
             tableBody.innerHTML = "";
