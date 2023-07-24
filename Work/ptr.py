@@ -4,7 +4,7 @@ import os
 
 def format_trunc(number):
     truncated_number = int(number * 100) / 100 
-    formatted_number = "{:.2f}".format(truncated_number)     
+    formatted_number = "{:.3f}".format(truncated_number)     
     return formatted_number
 
 N = int( input( "Opps for AA: ") or "0" )
