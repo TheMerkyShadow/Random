@@ -75,14 +75,14 @@
             let remainingDays = 0;
             let daysWorked = 0;
             for (let day = currentDate.getDate(); day <= lastDay; day++) {
-               const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
-               if (userDayOff === -1 || (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff)) {       remainingDays++;
-                  if (daysWorked < remainingDays) {
-                     daysWorked++;
-                   }
-               }
-             }
-
+                const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
+                if (userDayOff === -1 || (currentDayOfWeek !== 0 && (userDayOff !== 0 || currentDayOfWeek !== userDayOff))) {
+                    remainingDays++;
+                    if (daysWorked < remainingDays) {
+                        daysWorked++;
+                    }
+                }
+            }
 
             const gap = Math.abs((currentSales - goal) / daysWorked);
             const boxes = gap >= 1 ? Math.ceil(gap) : 0;
