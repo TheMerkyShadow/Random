@@ -69,22 +69,22 @@
             const currentSales = parseInt(document.getElementById("currentSales").value);
 
             const currentDate = new Date();
-            const lastDay = (new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)).getDate();
+            const currentDate = new Date();
 
+            const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+            const userDayOff = parseInt(document.getElementById("dayOff").value);
+
+            let day = currentDate.getDate();
             let remainingDays = 0;
             let daysWorked = 0;
-            for (let day = currentDate.getDate(); day <= lastDay; day++) {
-                const userDayOff = parseInt(document.getElementById("dayOff").value);
 
-                const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
-                if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff ) {
-                    if ((day - currentDate.getDate()) % 7 !== 0) {
-                        if( userDayOff == -1 ){ continue }
-                        remainingDays++;
-                        daysWorked++;
-                   }
-                }
-            }
+            for (; day <= lastDay; day++) {
+              const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
+              if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff && daysWorked !== day) {
+                 remainingDays++;
+                 daysWorked = day;
+              }
+             }
 
             const gap = Math.abs((currentSales - goal) / daysWorked);
             const boxes = gap >= 1 ? Math.ceil(gap) : 0;
