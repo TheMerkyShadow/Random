@@ -62,12 +62,12 @@
                 }
             }
 
-            const positiveGap = (goal - currentSales) / daysWorked;
+            const negativeGap = (currentSales - goal) / daysWorked;
 
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = `
                 <p>Remaining days (excluding Sundays and off days): ${remainingDays}</p>
-                <p>Positive Gap: ${positiveGap.toFixed(2)}</p>
+                <p>Negative Gap: ${negativeGap.toFixed(2)}</p>
             `;
         }
 
