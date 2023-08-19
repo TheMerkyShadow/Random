@@ -79,7 +79,7 @@
                 const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
                 if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff ) {
                     if ((day - currentDate.getDate()) % 7 !== 0) {
-                        if( userDayOff !== -1 ){ continue }
+                        if( userDayOff == -1 ){ continue }
                         remainingDays++;
                         daysWorked++;
                    }
