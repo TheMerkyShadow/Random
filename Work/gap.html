@@ -44,6 +44,18 @@
         <input type="number" id="currentSales" required>
         <br>
 
+        <label for="dayOff">Your Typical Day Off:</label>
+        <select id="dayOff" required>
+            <option value="0">Sunday</option>
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
+        </select>
+        <br>
+
         <input type="submit" value="Calculate">
     </form>
 
@@ -62,7 +74,10 @@
             let remainingDays = 0;
             let daysWorked = 0;
             for (let day = currentDate.getDate(); day <= lastDay; day++) {
-                if (new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay() !== 0) {
+                const userDayOff = parseInt(document.getElementById("dayOff").value);
+
+                const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
+                if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff) {
                     if ((day - currentDate.getDate()) % 7 !== 0) {
                         remainingDays++;
                         daysWorked++;
