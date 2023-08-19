@@ -20,6 +20,14 @@
             width: 100%;
             max-width: 200px;
         }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
     </style>
 </head>
 <body>
@@ -62,12 +70,13 @@
                 }
             }
 
-            const negativeGap = (currentSales - goal) / daysWorked;
+            const gap = (currentSales - goal) / daysWorked;
+            const gapColor = gap > 1 ? "red" : "green";
 
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = `
                 <p>Remaining days (excluding Sundays and off days): ${remainingDays}</p>
-                <p>Negative Gap: ${negativeGap.toFixed(2)}</p>
+                <p class="${gapColor}">Gap: ${gap.toFixed(2)}</p>
             `;
         }
 
