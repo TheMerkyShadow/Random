@@ -20,14 +20,6 @@
             width: 100%;
             max-width: 200px;
         }
-
-        .red {
-            color: red;
-        }
-
-        .green {
-            color: green;
-        }
     </style>
 </head>
 <body>
@@ -70,13 +62,11 @@
                 }
             }
 
-            const gap = (currentSales - goal) / daysWorked;
-            const gapColor = gap > 1 ? "green" : "red";
-
+            const gap = Math.abs((currentSales - goal) / daysWorked);
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = `
                 <p>Remaining days (excluding Sundays and off days): ${remainingDays}</p>
-                <p class="${gapColor}">Gap: ${gap.toFixed(2)}</p>
+                <p>Gap: ${gap.toFixed(2)}</p>
             `;
         }
 
