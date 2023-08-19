@@ -67,19 +67,18 @@
         function calculate() {
             const goal = parseInt(document.getElementById("goal").value);
             const currentSales = parseInt(document.getElementById("currentSales").value);
+            const userDayOff = parseInt(document.getElementById("dayOff").value);
 
             const currentDate = new Date();
             const lastDay = (new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)).getDate();
 
             let remainingDays = 0;
             let daysWorked = 0;
-            for (let day = currentDate.getDate(); day < lastDay + 1; day++) {
-                const userDayOff = parseInt(document.getElementById("dayOff").value);
-
+            for (let day = currentDate.getDate(); day <= lastDay; day++) {
                 const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
-                if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff) {
-                    if ((day - currentDate.getDate()) % 7 !== 0) {
-                        remainingDays++;
+                if (userDayOff === -1 || (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff)) {
+                    remainingDays++;
+                    if (daysWorked < remainingDays) {
                         daysWorked++;
                     }
                 }
