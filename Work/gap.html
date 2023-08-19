@@ -73,7 +73,7 @@
 
             let remainingDays = 0;
             let daysWorked = 0;
-            for (let day = currentDate.getDate(); day <= lastDay; day++) {
+            for (let day = currentDate.getDate(); day < lastDay; day++) {
                 const userDayOff = parseInt(document.getElementById("dayOff").value);
 
                 const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
