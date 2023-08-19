@@ -71,12 +71,13 @@
             }
 
             const gap = Math.abs((currentSales - goal) / daysWorked);
-            const roundedGap = gap > 1 ? Math.ceil(gap) : (gap < 1 ? 0 : gap);
+            const boxes = gap >= 1 ? Math.ceil(gap) : 0;
 
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = `
                 <p>Remaining days (excluding Sundays and off days): ${remainingDays}</p>
-                <p>Gap: ${roundedGap.toFixed(1)}</p>
+                <p>Gap: ${gap.toFixed(2)}</p>
+                <p>Boxes: ${boxes.toFixed(1)}</p>
             `;
         }
 
