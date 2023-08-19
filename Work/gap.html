@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Sales Goal Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +19,14 @@
             margin-top: 10px;
             width: 100%;
             max-width: 200px;
+        }
+
+        /* Media query for smaller screens (e.g., smartphones) */
+        @media only screen and (max-width: 600px) {
+            input[type="number"],
+            input[type="submit"] {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
