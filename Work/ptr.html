@@ -83,7 +83,52 @@
     </table>
 
     <script>
-        // JavaScript code remains unchanged
+        function formatTrunc(number) {
+            const truncatedNumber = Math.floor(number * 100) / 100;
+            const formattedNumber = truncatedNumber.toFixed(2);
+            return formattedNumber;
+        }
+
+        function calculate() {
+            let N = parseInt(document.getElementById("oppsPTR").value) || 0;
+            const SMB = parseInt(document.getElementById("smbDeduct").value) || 0;
+            N -= SMB; // Subtract SMB from N
+            
+            const PTRPercentage = parseFloat(document.getElementById("ptrPercentage").value.replace("%", "")) / 100;
+            const PTRNumber = N * PTRPercentage;
+            const tableBody = document.querySelector("#resultTable tbody");
+            tableBody.innerHTML = "";
+
+            for (let X = 0; X <= 50; X++) {
+                const PTR = (PTRNumber + X) / (N + X);
+                const formattedPTR = formatTrunc(PTR);
+
+                const row = document.createElement("tr");
+                const xCell = document.createElement("td");
+                const ptrCell = document.createElement("td");
+
+                xCell.textContent = X;
+                ptrCell.textContent = formattedPTR;
+
+                row.appendChild(xCell);
+                row.appendChild(ptrCell);
+
+                tableBody.appendChild(row);
+
+                if (PTR >= 0.70) {
+                    break;
+                }
+            }
+
+            const resultTable = document.getElementById("resultTable");
+            resultTable.style.display = "table";
+        }
+
+        const form = document.getElementById("inputForm");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            calculate();
+        });
     </script>
 </body>
 </html>
