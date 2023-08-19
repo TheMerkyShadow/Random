@@ -77,11 +77,11 @@
                 const userDayOff = parseInt(document.getElementById("dayOff").value);
 
                 const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
-                if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff) {
-                    if ((day - currentDate.getDate()) % 7 !== 0) {
-                        remainingDays++;
-                        daysWorked++;
-                    }
+                if (currentDayOfWeek !== 0 && currentDayOfWeek !== userDayOff && userDayOff !== -1) {
+                   if ((day - currentDate.getDate()) % 7 !== 0) {
+                      remainingDays++;
+                      daysWorked++;
+                   }
                 }
             }
 
