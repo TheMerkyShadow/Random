@@ -1,4 +1,5 @@
 import datetime
+import math
 
 def calculate():
     goal = int(input("Sales Goal: "))
@@ -16,8 +17,9 @@ def calculate():
                 days_worked += 1
     
     gap = abs((current_sales - goal) / days_worked)
+    rounded_gap = math.ceil(gap) if gap > 1 else (0 if gap < 1 else gap)
     
     print(f"Remaining days (excluding Sundays and off days): {remaining_days}")
-    print(f"Gap: {gap:.2f}")
+    print(f"Gap: {rounded_gap:.1f}")
 
 calculate()
