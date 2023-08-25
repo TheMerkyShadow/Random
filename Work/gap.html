@@ -34,14 +34,27 @@
     <h1>Sales Goal Calculator</h1>
 
     <form id="inputForm">
-        <label for="goal">Sales Goal:</label><br>
-        <input type="number" id="goal" required><br>
+        <label for="goal">Sales Goal:</label>
+        <br>
+        <input type="number" id="goal" required>
+        <br>
 
-        <label for="currentSales">Current Sales:</label><br>
-        <input type="number" id="currentSales" required><br>
+        <label for="currentSales">Current Sales:</label>
+        <br>
+        <input type="number" id="currentSales" required>
+        <br>
 
-        <label for="dayOff">Your Typical Days Off:</label><br>
-        <input type="date" id="dayOff" multiple><br>
+        <label for="dayOff">Your Typical Day Off:</label>
+        <select id="dayOff" required>
+            <option value="-1">N/A (Store)</option>      
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
+        </select>
+        <br>
 
         <input type="submit" value="Calculate">
     </form>
@@ -51,18 +64,10 @@
     </div>
 
     <script>
-        const form = document.getElementById("inputForm");
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            calculate();
-        });
-
         function calculate() {
             const goal = parseInt(document.getElementById("goal").value);
             const currentSales = parseInt(document.getElementById("currentSales").value);
-
-            const selectedDatesInput = document.getElementById("dayOff");
-            const selectedDates = Array.from(selectedDatesInput.selectedOptions, option => new Date(option.value));
+            const userDayOff = parseInt(document.getElementById("dayOff").value);
 
             const currentDate = new Date();
             const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
@@ -71,7 +76,7 @@
             let daysWorked = 0;
             for (let day = currentDate.getDate(); day <= lastDay; day++) {
                 const currentDayOfWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), day).getDay();
-                if (currentDayOfWeek !== 0 && (!selectedDates.length || !selectedDates.some(date => date.getDay() === currentDayOfWeek))) {
+                if (currentDayOfWeek !== 0 && (userDayOff === -1 || currentDayOfWeek !== userDayOff)) {
                     remainingDays++;
                     daysWorked++;
                 }
@@ -82,11 +87,17 @@
 
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = `
-                <p>Remaining days (excluding Sundays and selected days): ${remainingDays}</p>
+                <p>Remaining days (excluding Sundays and off days): ${remainingDays}</p>
                 <p>Gap: ${gap.toFixed(2)}</p>
                 <p>Boxes: ${boxes.toFixed(1)}</p>
             `;
         }
+
+        const form = document.getElementById("inputForm");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            calculate();
+        });
     </script>
 </body>
 </html>
