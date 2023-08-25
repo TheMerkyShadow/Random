@@ -51,6 +51,12 @@
     </div>
 
     <script>
+        const form = document.getElementById("inputForm");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            calculate();
+        });
+
         function calculate() {
             const goal = parseInt(document.getElementById("goal").value);
             const currentSales = parseInt(document.getElementById("currentSales").value);
@@ -81,12 +87,6 @@
                 <p>Boxes: ${boxes.toFixed(1)}</p>
             `;
         }
-
-        const form = document.getElementById("inputForm");
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            calculate();
-        });
     </script>
 </body>
 </html>
