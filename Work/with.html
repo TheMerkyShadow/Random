@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+  
+    <style>
+        h1 {
+            text-decoration-line: underline;
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+            display: none; /* Hide headings by default */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px auto;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            table-layout: fixed; /* Set table layout to fixed */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: center;
+            word-wrap: break-word; /* Allow words to break and wrap */
+            cursor: pointer; /* Add cursor pointer */
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        /* Style for the Welcome plan */
+        .plan-name.welcome,
+        .plan-price.welcome {
+            color: rgba(255, 0, 0, 0.8); /* Red with slight transparency */
+        }
+        /* Style for the Plus plan */
+        .plan-name.plus,
+        .plan-price.plus {
+            color: rgba(0, 128, 0, 0.8); /* Green with slight transparency */
+        }
+        /* Style for the Ultimate plan */
+        .plan-name.ultimate,
+        .plan-price.ultimate {
+            color: rgba(165, 42, 42, 0.8); /* Brown with slight transparency */
+        }
+        /* Style for the disclaimer list */
+        .disclaimer {
+            border: 3px solid #ddd;
+            padding: 3px; /* Adjust padding to your preference */
+            font-size: 8px;
+            color: #666;
+            margin-top: 10px;
+            border-radius: 10px; /* Add border radius for a rounded appearance */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+        .disclaimer p {
+            text-align: left;
+            margin: 0;
+            padding: 0px 0;
+        }
+        .footer-image {
+            position: fixed;
+            bottom: 10%;
+            left: 38%;
+            width: 25%; 
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1> Plans with FIOS </h1>
+    <div class="container">
+        <table id="planTable">
+            <tr>
+                <th>Plan</th>
+                <th>1 Line</th>
+                <th>2 Lines</th>
+                <th>3 Lines</th>
+                <th>4 Lines</th>
+                <th>5 Lines</th>
+            </tr>
+            <tr>
+                <td class="plan-name welcome">Unlimited Welcome</td>
+                <td class="plan-price welcome" price="60" amount ="1" ></td>
+				<td class="plan-price welcome" price="50" amount ="2" ></td>
+				<td class="plan-price welcome" price="35" amount ="3" ></td>
+				<td class="plan-price welcome" price="25" amount ="4" ></td>
+				<td class="plan-price welcome" price="0" amount ="5" ></td>
+            </tr>
+            <tr>
+                <td class="plan-name plus">Unlimited Plus</td>
+                <td class="plan-price plus" price="70" amount ="1" ></td>
+				<td class="plan-price plus" price="60" amount ="2" ></td>
+				<td class="plan-price plus" price="45" amount ="3" ></td>
+				<td class="plan-price plus" price="35" amount ="4" ></td>
+				<td class="plan-price plus" price="0" amount ="5" ></td>				
+            </tr>
+            <tr>
+                <td class="plan-name ultimate">Unlimited Ultimate</td>
+                <td class="plan-price ultimate" price="80" amount ="1" ></td>
+				<td class="plan-price ultimate" price="70" amount ="2" ></td>
+				<td class="plan-price ultimate" price="55" amount ="3" ></td>
+				<td class="plan-price ultimate" price="45" amount ="4" ></td>
+				<td class="plan-price ultimate" price="0" amount ="5" ></td>				
+            </tr>
+        </table>
+        <!-- Disclaimer List -->
+        <div class="disclaimer">
+            <p> These prices do NOT reflect (taxes + fees). </p>
+            <p> Assumes autopay and paper-free with bank account or VZ CC. </p>
+            <p> Assumes you have gigbit speeds to receive discounts. </p>
+            <p> Assumes (Mobile + Home Discount) is being applied. </p>
+        </div>
+    </div>
+
+    <script>
+        // Get all elements with class "plan-price"
+        const planPrices = document.querySelectorAll('.plan-price');
+
+        // Calculate and display total price for each plan
+        planPrices.forEach(planPrice => {
+            const price = parseFloat(planPrice.getAttribute('price')); // Get price attribute
+            const amount = parseFloat(planPrice.getAttribute('amount')); // Get amount attribute
+            const totalPrice = Math.round(price * amount); // Calculate total price and round
+            const pricePerLine = `$${price}/line`; // Format price per line
+            planPrice.textContent = `$${totalPrice} (${pricePerLine})`; // Display total price and price per line
+        });
+
+        // Show total price div
+        document.getElementById('totalPrice').style.display = 'block';
+    </script>
+
+
+
+</body>
+</html>
